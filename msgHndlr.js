@@ -3082,7 +3082,7 @@ module.exports = msgHandler = async (client, message) => {
                 if (!animeQuery) return client.reply(from, 'Format salah!! Silahkan cek menu untuk melihat format yang benar!!', id)
                 if (isGroupMsg) {
                     request.get({
-                        url: 'https://mhankbarbar.herokuapp.com/api/dewabatch?q=' + animeQuery + `&apiKey=${mhankBB}`,
+                        url: 'https://mhankbarbars.herokuapp.com/api/dewabatch?q=' + animeQuery + `&apiKey=${mhankBB}`,
                         json: true,
                         headers: {
                             'User-Agent': 'request'
@@ -3115,7 +3115,7 @@ module.exports = msgHandler = async (client, message) => {
                                     con.query(sql2, async function (err, result) {
                                         if (err) throw err;
                                         request.get({
-                                            url: 'https://mhankbarbar.herokuapp.com/api/dewabatch?q=' + body.slice(7) + `&apiKey=${mhankBB}`,
+                                            url: 'https://mhankbarbars.herokuapp.com/api/dewabatch?q=' + body.slice(7) + `&apiKey=${mhankBB}`,
                                             json: true,
                                             headers: {
                                                 'User-Agent': 'request'
@@ -3144,7 +3144,7 @@ module.exports = msgHandler = async (client, message) => {
                                     con.query(sql1, async function (err, result) {
                                         if (err) throw err;
                                         request.get({
-                                            url: 'https://mhankbarbar.herokuapp.com/api/dewabatch?q=' + body.slice(7) + `&apiKey=${mhankBB}`,
+                                            url: 'https://mhankbarbars.herokuapp.com/api/dewabatch?q=' + body.slice(7) + `&apiKey=${mhankBB}`,
                                             json: true,
                                             headers: {
                                                 'User-Agent': 'request'
@@ -3166,7 +3166,7 @@ module.exports = msgHandler = async (client, message) => {
                         });
                     } else {
                         request.get({
-                            url: 'https://mhankbarbar.herokuapp.com/api/dewabatch?q=' + body.slice(7) + `&apiKey=${mhankBB}`,
+                            url: 'https://mhankbarbars.herokuapp.com/api/dewabatch?q=' + body.slice(7) + `&apiKey=${mhankBB}`,
                             json: true,
                             headers: {
                                 'User-Agent': 'request'
@@ -4107,7 +4107,7 @@ module.exports = msgHandler = async (client, message) => {
                 }
                 break
             case `${prefix}listdaerah`:
-                const listDaerah = await get('https://mhankbarbar.herokuapp.com/daerah').json()
+                const listDaerah = await get('https://mhankbarbars.herokuapp.com/daerah').json()
                 client.reply(from, listDaerah, id)
                 break
             case `${prefix}listblock`:
@@ -4133,7 +4133,7 @@ module.exports = msgHandler = async (client, message) => {
             case `${prefix}loli`:
                 if (isGroupMsg) {
                     request.get({
-                        url: `https://mhankbarbar.herokuapp.com/api/randomloli`,
+                        url: `https://mhankbarbars.herokuapp.com/api/randomloli`,
                         json: true,
                         headers: {
                             'User-Agent': 'request'
@@ -4164,7 +4164,7 @@ module.exports = msgHandler = async (client, message) => {
                                     con.query(sql2, async function (err, result) {
                                         if (err) throw err;
                                         request.get({
-                                            url: `https://mhankbarbar.herokuapp.com/api/randomloli`,
+                                            url: `https://mhankbarbars.herokuapp.com/api/randomloli`,
                                             json: true,
                                             headers: {
                                                 'User-Agent': 'request'
@@ -4191,7 +4191,7 @@ module.exports = msgHandler = async (client, message) => {
                                     con.query(sql1, async function (err, result) {
                                         if (err) throw err;
                                         request.get({
-                                            url: `https://mhankbarbar.herokuapp.com/api/randomloli`,
+                                            url: `https://mhankbarbars.herokuapp.com/api/randomloli`,
                                             json: true,
                                             headers: {
                                                 'User-Agent': 'request'
@@ -4211,7 +4211,7 @@ module.exports = msgHandler = async (client, message) => {
                         });
                     } else {
                         request.get({
-                            url: `https://mhankbarbar.herokuapp.com/api/randomloli`,
+                            url: `https://mhankbarbars.herokuapp.com/api/randomloli`,
                             json: true,
                             headers: {
                                 'User-Agent': 'request'
@@ -4649,7 +4649,7 @@ module.exports = msgHandler = async (client, message) => {
                     if (!args[1].split('/')[2].startsWith('www.xnxx.com')) return client.reply(from, `Maaf, link yang anda masukan tidak valid!`, id)
                     client.reply(from, '_Please wait..._', id)
                     request.get({
-                        url: `https://mhankbarbar.herokuapp.com/api/xnxx?url=${args[1]}&apiKey=${mhankBB}`,
+                        url: `https://mhankbarbars.herokuapp.com/api/xnxx?url=${args[1]}&apiKey=${mhankBB}`,
                         json: true,
                         headers: {
                             'User-Agent': 'request'
@@ -4672,7 +4672,7 @@ module.exports = msgHandler = async (client, message) => {
                     if (!args[1].split('/')[2].startsWith('www.xnxx.com')) return client.reply(from, `Maaf, link yang anda masukan tidak valid!`, id)
                     client.reply(from, '_Please wait..._', id)
                     request.get({
-                        url: `https://mhankbarbar.herokuapp.com/api/xnxx?url=${args[1]}&apiKey=${mhankBB}`,
+                        url: `https://mhankbarbars.herokuapp.com/api/xnxx?url=${args[1]}&apiKey=${mhankBB}`,
                         json: true,
                         headers: {
                             'User-Agent': 'request'
@@ -4698,7 +4698,7 @@ module.exports = msgHandler = async (client, message) => {
                     if (!args[1].split('/')[2].startsWith('www.nekopoi')) return client.reply(from, `Maaf, link yang anda masukan tidak valid!`, id)
                     client.reply(from, '_Please wait..._', id)
                     request.get({
-                        url: `https://mhankbarbar.herokuapp.com/api/nekopoi?url=${args[1]}&apiKey=${mhankBB}`,
+                        url: `https://mhankbarbars.herokuapp.com/api/nekopoi?url=${args[1]}&apiKey=${mhankBB}`,
                         json: true,
                         headers: {
                             'User-Agent': 'request'
@@ -4720,7 +4720,7 @@ module.exports = msgHandler = async (client, message) => {
                     if (!args[1].split('/')[2].startsWith('www.nekopoi')) return client.reply(from, `Maaf, link yang anda masukan tidak valid!`, id)
                     client.reply(from, '_Please wait..._', id)
                     request.get({
-                        url: `https://mhankbarbar.herokuapp.com/api/nekopoi?url=${args[1]}&apiKey=${mhankBB}`,
+                        url: `https://mhankbarbars.herokuapp.com/api/nekopoi?url=${args[1]}&apiKey=${mhankBB}`,
                         json: true,
                         headers: {
                             'User-Agent': 'request'
@@ -5348,7 +5348,7 @@ module.exports = msgHandler = async (client, message) => {
                 if (isGroupMsg) {
                     if (!isNsfw) return client.reply(from, 'Command/Perintah NSFW belum di aktifkan di group ini!', id);
                     request.get({
-                        url: `https://mhankbarbar.herokuapp.com/api/nekonime`,
+                        url: `https://mhankbarbars.herokuapp.com/api/nekonime`,
                         json: true,
                         headers: {
                             'User-Agent': 'request'
@@ -5370,7 +5370,7 @@ module.exports = msgHandler = async (client, message) => {
                 } else {
                     if (!isVIP) return client.reply(from, 'Maaf, Fitur ini hanya bisa digunakan oleh user VIP!\n\nKetik *$preminfo*\nUntuk mengetahui kelebihan user VIP atau invite BOT kedalam grup dan gunakan fitur NSFW!', id)
                     request.get({
-                        url: `https://mhankbarbar.herokuapp.com/api/nekonime`,
+                        url: `https://mhankbarbars.herokuapp.com/api/nekonime`,
                         json: true,
                         headers: {
                             'User-Agent': 'request'
@@ -6118,7 +6118,7 @@ module.exports = msgHandler = async (client, message) => {
                 const komikuArgs = encodeURI(body.slice(8))
                 if (isGroupMsg) {
                     request.get({
-                        url: `https://mhankbarbar.herokuapp.com/api/komiku?q=${komikuArgs}&apiKey=${mhankBB}`,
+                        url: `https://mhankbarbars.herokuapp.com/api/komiku?q=${komikuArgs}&apiKey=${mhankBB}`,
                         json: true,
                         headers: {
                             'User-Agent': 'request'
@@ -6151,7 +6151,7 @@ module.exports = msgHandler = async (client, message) => {
                                     con.query(sql2, async function (err, result) {
                                         if (err) throw err;
                                         request.get({
-                                            url: `https://mhankbarbar.herokuapp.com/api/komiku?q=${komikuArgs}&apiKey=${mhankBB}`,
+                                            url: `https://mhankbarbars.herokuapp.com/api/komiku?q=${komikuArgs}&apiKey=${mhankBB}`,
                                             json: true,
                                             headers: {
                                                 'User-Agent': 'request'
@@ -6180,7 +6180,7 @@ module.exports = msgHandler = async (client, message) => {
                                     con.query(sql1, async function (err, result) {
                                         if (err) throw err;
                                         request.get({
-                                            url: `https://mhankbarbar.herokuapp.com/api/komiku?q=${komikuArgs}&apiKey=${mhankBB}`,
+                                            url: `https://mhankbarbars.herokuapp.com/api/komiku?q=${komikuArgs}&apiKey=${mhankBB}`,
                                             json: true,
                                             headers: {
                                                 'User-Agent': 'request'
@@ -6202,7 +6202,7 @@ module.exports = msgHandler = async (client, message) => {
                         });
                     } else {
                         request.get({
-                            url: `https://mhankbarbar.herokuapp.com/api/komiku?q=${komikuArgs}&apiKey=${mhankBB}`,
+                            url: `https://mhankbarbars.herokuapp.com/api/komiku?q=${komikuArgs}&apiKey=${mhankBB}`,
                             json: true,
                             headers: {
                                 'User-Agent': 'request'
@@ -6226,7 +6226,7 @@ module.exports = msgHandler = async (client, message) => {
                 const kusonimeArgs = encodeURI(body.slice(10))
                 if (isGroupMsg) {
                     request.get({
-                        url: `https://mhankbarbar.herokuapp.com/api/kuso?q=${kusonimeArgs}&apiKey=${mhankBB}`,
+                        url: `https://mhankbarbars.herokuapp.com/api/kuso?q=${kusonimeArgs}&apiKey=${mhankBB}`,
                         json: true,
                         headers: {
                             'User-Agent': 'request'
@@ -6259,7 +6259,7 @@ module.exports = msgHandler = async (client, message) => {
                                     con.query(sql2, async function (err, result) {
                                         if (err) throw err;
                                         request.get({
-                                            url: `https://mhankbarbar.herokuapp.com/api/kuso?q=${kusonimeArgs}&apiKey=${mhankBB}`,
+                                            url: `https://mhankbarbars.herokuapp.com/api/kuso?q=${kusonimeArgs}&apiKey=${mhankBB}`,
                                             json: true,
                                             headers: {
                                                 'User-Agent': 'request'
@@ -6288,7 +6288,7 @@ module.exports = msgHandler = async (client, message) => {
                                     con.query(sql1, async function (err, result) {
                                         if (err) throw err;
                                         request.get({
-                                            url: `https://mhankbarbar.herokuapp.com/api/kuso?q=${kusonimeArgs}&apiKey=${mhankBB}`,
+                                            url: `https://mhankbarbars.herokuapp.com/api/kuso?q=${kusonimeArgs}&apiKey=${mhankBB}`,
                                             json: true,
                                             headers: {
                                                 'User-Agent': 'request'
@@ -6310,7 +6310,7 @@ module.exports = msgHandler = async (client, message) => {
                         });
                     } else {
                         request.get({
-                            url: `https://mhankbarbar.herokuapp.com/api/kuso?q=${kusonimeArgs}&apiKey=${mhankBB}`,
+                            url: `https://mhankbarbars.herokuapp.com/api/kuso?q=${kusonimeArgs}&apiKey=${mhankBB}`,
                             json: true,
                             headers: {
                                 'User-Agent': 'request'
