@@ -124,6 +124,14 @@ module.exports = msgHandler = async (client, message) => {
         if (isBlocked) return
         // if (!isOwner) return
 
+        // ClearChat!!!
+        cron.schedule('0 1 * * *', async () => {
+            const allChatz = await client.getAllChats()
+            for (let dchat of allChatz) {
+                await client.deleteChat(dchat.id)
+            }
+        });
+
         switch (command) {
             case `${prefix}mylimit`:
             case `${prefix}myinfo`:
@@ -1271,7 +1279,7 @@ module.exports = msgHandler = async (client, message) => {
                     if (isGroupMsg) {
                         if (args[1].startsWith('https://youtu.be/')) {
                             request.get({
-                                url: `https://api.vhtear.com/ytdl?link=${args[1]}&apikey=${vhTear}`,
+                                url: `https://mhankbarbars.herokuapp.com/api/ytv?url=${args[1]}&apiKey=${mhankBB}`,
                                 json: true,
                                 headers: {
                                     'User-Agent': 'request'
@@ -1283,14 +1291,21 @@ module.exports = msgHandler = async (client, message) => {
                                     console.log('Status:', res.statusCode);
                                     client.reply(from, 'Maaf link bermasalah yang di sebabkan post bersifat private!', id)
                                 } else {
-                                    const { imgUrl, size, UrlVideo, title } = data.result
-                                    if (Number(size.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
-                                    client.sendFileFromUrl(from, imgUrl, 'KZ0-YTDL.jpg', `[DATA DITEMUKAN]\n\n*Title:* ${title}\n*Size:* ${size}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id).then(() => client.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id))
+                                    // ! VHThears YTDL
+                                    // const { imgUrl, size, UrlVideo, title } = data.result
+                                    // if (Number(size.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
+                                    // client.sendFileFromUrl(from, imgUrl, 'KZ0-YTDL.jpg', `[DATA DITEMUKAN]\n\n*Title:* ${title}\n*Size:* ${size}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id).then(() => client.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id))
+
+                                    // ! MBB YTDL
+                                    const { filesize, result, thumb, title } = data
+                                    if (Number(filesize.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
+                                    await client.sendFileFromUrl(from, thumb, `[DATA DITEMUKAN]\n\n${title}.jpg`, `*Title:* ${title}\n*Size:* ${filesize}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id)
+                                    await client.sendFileFromUrl(from, result, `${title}.mp4`, '', id)
                                 }
                             })
                         } else if (args[1].startsWith('https://www.youtube.com/')) {
                             request.get({
-                                url: `https://api.vhtear.com/ytdl?link=https://youtu.be/${args[1].split('v=')}&apikey=${vhTear}`,
+                                url: `https://mhankbarbars.herokuapp.com/api/ytv?url=https://youtu.be/${args[1].split('v=')}&apiKey=${mhankBB}`,
                                 json: true,
                                 headers: {
                                     'User-Agent': 'request'
@@ -1302,9 +1317,16 @@ module.exports = msgHandler = async (client, message) => {
                                     console.log('Status:', res.statusCode);
                                     client.reply(from, 'Maaf link bermasalah yang di sebabkan post bersifat private!', id)
                                 } else {
-                                    const { imgUrl, size, UrlVideo, title } = data.result
-                                    if (Number(size.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
-                                    client.sendFileFromUrl(from, imgUrl, 'KZ0-YTDL.jpg', `[DATA DITEMUKAN]\n\n*Title:* ${title}\n*Size:* ${size}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id).then(() => client.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id))
+                                    // ! VHThears YTDL
+                                    // const { imgUrl, size, UrlVideo, title } = data.result
+                                    // if (Number(size.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
+                                    // client.sendFileFromUrl(from, imgUrl, 'KZ0-YTDL.jpg', `[DATA DITEMUKAN]\n\n*Title:* ${title}\n*Size:* ${size}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id).then(() => client.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id))
+
+                                    // ! MBB YTDL
+                                    const { filesize, result, thumb, title } = data
+                                    if (Number(filesize.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
+                                    await client.sendFileFromUrl(from, thumb, `[DATA DITEMUKAN]\n\n${title}.jpg`, `*Title:* ${title}\n*Size:* ${filesize}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id)
+                                    await client.sendFileFromUrl(from, result, `${title}.mp4`, '', id)
                                 }
                             })
                         } else {
@@ -1328,7 +1350,7 @@ module.exports = msgHandler = async (client, message) => {
                                             if (err) throw err;
                                             if (args[1].startsWith('https://youtu.be/')) {
                                                 request.get({
-                                                    url: `https://api.vhtear.com/ytdl?link=${args[1]}&apikey=${vhTear}`,
+                                                    url: `https://mhankbarbars.herokuapp.com/api/ytv?url=${args[1]}&apiKey=${mhankBB}`,
                                                     json: true,
                                                     headers: {
                                                         'User-Agent': 'request'
@@ -1340,14 +1362,21 @@ module.exports = msgHandler = async (client, message) => {
                                                         console.log('Status:', res.statusCode);
                                                         client.reply(from, 'Maaf link bermasalah yang di sebabkan post bersifat private!', id)
                                                     } else {
-                                                        const { imgUrl, size, UrlVideo, title } = data.result
-                                                        if (Number(size.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
-                                                        client.sendFileFromUrl(from, imgUrl, 'KZ0-YTDL.jpg', `[DATA DITEMUKAN]\n\n*Title:* ${title}\n*Size:* ${size}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id).then(() => client.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id))
+                                                        // ! VHThears YTDL
+                                                        // const { imgUrl, size, UrlVideo, title } = data.result
+                                                        // if (Number(size.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
+                                                        // client.sendFileFromUrl(from, imgUrl, 'KZ0-YTDL.jpg', `[DATA DITEMUKAN]\n\n*Title:* ${title}\n*Size:* ${size}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id).then(() => client.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id))
+
+                                                        // ! MBB YTDL
+                                                        const { filesize, result, thumb, title } = data
+                                                        if (Number(filesize.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
+                                                        await client.sendFileFromUrl(from, thumb, `[DATA DITEMUKAN]\n\n${title}.jpg`, `*Title:* ${title}\n*Size:* ${filesize}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id)
+                                                        await client.sendFileFromUrl(from, result, `${title}.mp4`, '', id)
                                                     }
                                                 })
                                             } else if (args[1].startsWith('https://www.youtube.com/')) {
                                                 request.get({
-                                                    url: `https://api.vhtear.com/ytdl?link=https://youtu.be/${args[1].split('v=')}&apikey=${vhTear}`,
+                                                    url: `https://mhankbarbars.herokuapp.com/api/ytv?url=https://youtu.be/${args[1].split('v=')}&apiKey=${mhankBB}`,
                                                     json: true,
                                                     headers: {
                                                         'User-Agent': 'request'
@@ -1359,9 +1388,16 @@ module.exports = msgHandler = async (client, message) => {
                                                         console.log('Status:', res.statusCode);
                                                         client.reply(from, 'Maaf link bermasalah yang di sebabkan post bersifat private!', id)
                                                     } else {
-                                                        const { imgUrl, size, UrlVideo, title } = data.result
-                                                        if (Number(size.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
-                                                        client.sendFileFromUrl(from, imgUrl, 'KZ0-YTDL.jpg', `[DATA DITEMUKAN]\n\n*Title:* ${title}\n*Size:* ${size}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id).then(() => client.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id))
+                                                        // ! VHThears YTDL
+                                                        // const { imgUrl, size, UrlVideo, title } = data.result
+                                                        // if (Number(size.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
+                                                        // client.sendFileFromUrl(from, imgUrl, 'KZ0-YTDL.jpg', `[DATA DITEMUKAN]\n\n*Title:* ${title}\n*Size:* ${size}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id).then(() => client.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id))
+
+                                                        // ! MBB YTDL
+                                                        const { filesize, result, thumb, title } = data
+                                                        if (Number(filesize.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
+                                                        await client.sendFileFromUrl(from, thumb, `[DATA DITEMUKAN]\n\n${title}.jpg`, `*Title:* ${title}\n*Size:* ${filesize}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id)
+                                                        await client.sendFileFromUrl(from, result, `${title}.mp4`, '', id)
                                                     }
                                                 })
                                             } else {
@@ -1381,7 +1417,7 @@ module.exports = msgHandler = async (client, message) => {
                                             if (err) throw err;
                                             if (args[1].startsWith('https://youtu.be/')) {
                                                 request.get({
-                                                    url: `https://api.vhtear.com/ytdl?link=${args[1]}&apikey=${vhTear}`,
+                                                    url: `https://mhankbarbars.herokuapp.com/api/ytv?url=${args[1]}&apiKey=${mhankBB}`,
                                                     json: true,
                                                     headers: {
                                                         'User-Agent': 'request'
@@ -1393,14 +1429,21 @@ module.exports = msgHandler = async (client, message) => {
                                                         console.log('Status:', res.statusCode);
                                                         client.reply(from, 'Maaf link bermasalah yang di sebabkan post bersifat private!', id)
                                                     } else {
-                                                        const { imgUrl, size, UrlVideo, title } = data.result
-                                                        if (Number(size.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
-                                                        client.sendFileFromUrl(from, imgUrl, 'KZ0-YTDL.jpg', `[DATA DITEMUKAN]\n\n*Title:* ${title}\n*Size:* ${size}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id).then(() => client.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id))
+                                                        // ! VHThears YTDL
+                                                        // const { imgUrl, size, UrlVideo, title } = data.result
+                                                        // if (Number(size.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
+                                                        // client.sendFileFromUrl(from, imgUrl, 'KZ0-YTDL.jpg', `[DATA DITEMUKAN]\n\n*Title:* ${title}\n*Size:* ${size}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id).then(() => client.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id))
+
+                                                        // ! MBB YTDL
+                                                        const { filesize, result, thumb, title } = data
+                                                        if (Number(filesize.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
+                                                        await client.sendFileFromUrl(from, thumb, `[DATA DITEMUKAN]\n\n${title}.jpg`, `*Title:* ${title}\n*Size:* ${filesize}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id)
+                                                        await client.sendFileFromUrl(from, result, `${title}.mp4`, '', id)
                                                     }
                                                 })
                                             } else if (args[1].startsWith('https://www.youtube.com/')) {
                                                 request.get({
-                                                    url: `https://api.vhtear.com/ytdl?link=https://youtu.be/${args[1].split('v=')}&apikey=${vhTear}`,
+                                                    url: `https://mhankbarbars.herokuapp.com/api/ytv?url=https://youtu.be/${args[1].split('v=')}&apiKey=${mhankBB}`,
                                                     json: true,
                                                     headers: {
                                                         'User-Agent': 'request'
@@ -1412,9 +1455,16 @@ module.exports = msgHandler = async (client, message) => {
                                                         console.log('Status:', res.statusCode);
                                                         client.reply(from, 'Maaf link bermasalah yang di sebabkan post bersifat private!', id)
                                                     } else {
-                                                        const { imgUrl, size, UrlVideo, title } = data.result
-                                                        if (Number(size.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
-                                                        client.sendFileFromUrl(from, imgUrl, 'KZ0-YTDL.jpg', `[DATA DITEMUKAN]\n\n*Title:* ${title}\n*Size:* ${size}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id).then(() => client.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id))
+                                                        // ! VHThears YTDL
+                                                        // const { imgUrl, size, UrlVideo, title } = data.result
+                                                        // if (Number(size.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
+                                                        // client.sendFileFromUrl(from, imgUrl, 'KZ0-YTDL.jpg', `[DATA DITEMUKAN]\n\n*Title:* ${title}\n*Size:* ${size}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id).then(() => client.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id))
+
+                                                        // ! MBB YTDL
+                                                        const { filesize, result, thumb, title } = data
+                                                        if (Number(filesize.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
+                                                        await client.sendFileFromUrl(from, thumb, `[DATA DITEMUKAN]\n\n${title}.jpg`, `*Title:* ${title}\n*Size:* ${filesize}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id)
+                                                        await client.sendFileFromUrl(from, result, `${title}.mp4`, '', id)
                                                     }
                                                 })
                                             } else {
@@ -1427,7 +1477,7 @@ module.exports = msgHandler = async (client, message) => {
                         } else {
                             if (args[1].startsWith('https://youtu.be/')) {
                                 request.get({
-                                    url: `https://api.vhtear.com/ytdl?link=${args[1]}&apikey=${vhTear}`,
+                                    url: `https://mhankbarbars.herokuapp.com/api/ytv?url=${args[1]}&apiKey=${mhankBB}`,
                                     json: true,
                                     headers: {
                                         'User-Agent': 'request'
@@ -1439,14 +1489,21 @@ module.exports = msgHandler = async (client, message) => {
                                         console.log('Status:', res.statusCode);
                                         client.reply(from, 'Maaf link bermasalah yang di sebabkan post bersifat private!', id)
                                     } else {
-                                        const { imgUrl, size, UrlVideo, title } = data.result
-                                        if (Number(size.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
-                                        client.sendFileFromUrl(from, imgUrl, 'KZ0-YTDL.jpg', `[DATA DITEMUKAN]\n\n*Title:* ${title}\n*Size:* ${size}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id).then(() => client.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id))
+                                        // ! VHThears YTDL
+                                        // const { imgUrl, size, UrlVideo, title } = data.result
+                                        // if (Number(size.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
+                                        // client.sendFileFromUrl(from, imgUrl, 'KZ0-YTDL.jpg', `[DATA DITEMUKAN]\n\n*Title:* ${title}\n*Size:* ${size}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id).then(() => client.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id))
+
+                                        // ! MBB YTDL
+                                        const { filesize, result, thumb, title } = data
+                                        if (Number(filesize.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
+                                        await client.sendFileFromUrl(from, thumb, `[DATA DITEMUKAN]\n\n${title}.jpg`, `*Title:* ${title}\n*Size:* ${filesize}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id)
+                                        await client.sendFileFromUrl(from, result, `${title}.mp4`, '', id)
                                     }
                                 })
                             } else if (args[1].startsWith('https://www.youtube.com/')) {
                                 request.get({
-                                    url: `https://api.vhtear.com/ytdl?link=https://youtu.be/${args[1].split('v=')}&apikey=${vhTear}`,
+                                    url: `https://mhankbarbars.herokuapp.com/api/ytv?url=https://youtu.be/${args[1].split('v=')}&apiKey=${mhankBB}`,
                                     json: true,
                                     headers: {
                                         'User-Agent': 'request'
@@ -1458,9 +1515,16 @@ module.exports = msgHandler = async (client, message) => {
                                         console.log('Status:', res.statusCode);
                                         client.reply(from, 'Maaf link bermasalah yang di sebabkan post bersifat private!', id)
                                     } else {
-                                        const { imgUrl, size, UrlVideo, title } = data.result
-                                        if (Number(size.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
-                                        client.sendFileFromUrl(from, imgUrl, 'KZ0-YTDL.jpg', `[DATA DITEMUKAN]\n\n*Title:* ${title}\n*Size:* ${size}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id).then(() => client.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id))
+                                        // ! VHThears YTDL
+                                        // const { imgUrl, size, UrlVideo, title } = data.result
+                                        // if (Number(size.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
+                                        // client.sendFileFromUrl(from, imgUrl, 'KZ0-YTDL.jpg', `[DATA DITEMUKAN]\n\n*Title:* ${title}\n*Size:* ${size}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id).then(() => client.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id))
+
+                                        // ! MBB YTDL
+                                        const { filesize, result, thumb, title } = data
+                                        if (Number(filesize.split(' MB')[0] > 64)) return client.reply(from, 'Maaf, Ukuran file terlalu besar!', id)
+                                        await client.sendFileFromUrl(from, thumb, `[DATA DITEMUKAN]\n\n${title}.jpg`, `*Title:* ${title}\n*Size:* ${filesize}\n\nMohon tunggu beberapa saat, dalam proses pengiriman file!`, id)
+                                        await client.sendFileFromUrl(from, result, `${title}.mp4`, '', id)
                                     }
                                 })
                             } else {
