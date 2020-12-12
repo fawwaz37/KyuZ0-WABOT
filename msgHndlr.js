@@ -36,7 +36,6 @@ const fetch = require('node-fetch');
 global.fetch = fetch;
 const PornHub = require('pornhub.js')
 const pornhub = new PornHub()
-var cron = require('node-cron');
 const ytdl = require('ytdl-core');
 const ytmp3Downloader = require("youtube-mp3-downloader");
 
@@ -108,6 +107,7 @@ module.exports = msgHandler = async (client, message) => {
         const ownerNumber = '6282255304881@c.us'
         const isOwner = sender.id === ownerNumber
         const isVIP = VIP.includes(sender.id)
+        const allChatz = await client.getAllChats()
         const nomernya = sender.id
         const isBlocked = blockNumber.includes(sender.id)
         const isNsfw = nsfwgrp.includes(chat.id)
@@ -123,14 +123,6 @@ module.exports = msgHandler = async (client, message) => {
         // if (isGroupMsg && !command.startsWith(prefix)) console.log('[\x1b[1;31mMSG\x1b[1;37m]', time, color(body), 'from', color(pushname), 'in', color(formattedTitle))
         if (isBlocked) return
         // if (!isOwner) return
-
-        // ClearChat!!!
-        cron.schedule('0 1 * * *', async () => {
-            const allChatz = await client.getAllChats()
-            for (let dchat of allChatz) {
-                await client.deleteChat(dchat.id)
-            }
-        });
 
         switch (command) {
             case `${prefix}mylimit`:
@@ -1284,7 +1276,7 @@ module.exports = msgHandler = async (client, message) => {
                                 headers: {
                                     'User-Agent': 'request'
                                 }
-                            }, (err, res, data) => {
+                            }, async (err, res, data) => {
                                 if (err) {
                                     console.log('Error : ', err);
                                 } else if (res.statusCode !== 200) {
@@ -1310,7 +1302,7 @@ module.exports = msgHandler = async (client, message) => {
                                 headers: {
                                     'User-Agent': 'request'
                                 }
-                            }, (err, res, data) => {
+                            }, async (err, res, data) => {
                                 if (err) {
                                     console.log('Error : ', err);
                                 } else if (res.statusCode !== 200) {
@@ -1355,7 +1347,7 @@ module.exports = msgHandler = async (client, message) => {
                                                     headers: {
                                                         'User-Agent': 'request'
                                                     }
-                                                }, (err, res, data) => {
+                                                }, async (err, res, data) => {
                                                     if (err) {
                                                         console.log('Error : ', err);
                                                     } else if (res.statusCode !== 200) {
@@ -1381,7 +1373,7 @@ module.exports = msgHandler = async (client, message) => {
                                                     headers: {
                                                         'User-Agent': 'request'
                                                     }
-                                                }, (err, res, data) => {
+                                                }, async (err, res, data) => {
                                                     if (err) {
                                                         console.log('Error : ', err);
                                                     } else if (res.statusCode !== 200) {
@@ -1422,7 +1414,7 @@ module.exports = msgHandler = async (client, message) => {
                                                     headers: {
                                                         'User-Agent': 'request'
                                                     }
-                                                }, (err, res, data) => {
+                                                }, async (err, res, data) => {
                                                     if (err) {
                                                         console.log('Error : ', err);
                                                     } else if (res.statusCode !== 200) {
@@ -1448,7 +1440,7 @@ module.exports = msgHandler = async (client, message) => {
                                                     headers: {
                                                         'User-Agent': 'request'
                                                     }
-                                                }, (err, res, data) => {
+                                                }, async (err, res, data) => {
                                                     if (err) {
                                                         console.log('Error : ', err);
                                                     } else if (res.statusCode !== 200) {
@@ -1482,7 +1474,7 @@ module.exports = msgHandler = async (client, message) => {
                                     headers: {
                                         'User-Agent': 'request'
                                     }
-                                }, (err, res, data) => {
+                                }, async (err, res, data) => {
                                     if (err) {
                                         console.log('Error : ', err);
                                     } else if (res.statusCode !== 200) {
@@ -1508,7 +1500,7 @@ module.exports = msgHandler = async (client, message) => {
                                     headers: {
                                         'User-Agent': 'request'
                                     }
-                                }, (err, res, data) => {
+                                }, async (err, res, data) => {
                                     if (err) {
                                         console.log('Error : ', err);
                                     } else if (res.statusCode !== 200) {
@@ -3871,7 +3863,7 @@ module.exports = msgHandler = async (client, message) => {
                 break
             case `${prefix}clearall`:
                 if (!isOwner) return client.reply(from, 'Perintah ini hanya untuk Owner bot', id)
-                const allChatz = await client.getAllChats()
+                // const allChatz = await client.getAllChats()
                 for (let dchat of allChatz) {
                     await client.deleteChat(dchat.id)
                 }

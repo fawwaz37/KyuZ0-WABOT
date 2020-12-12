@@ -1,16 +1,28 @@
 const { create, Client } = require('@open-wa/wa-automate')
+const cron = require('node-cron');
 const welcome = require('./lib/welcome')
 const msgHandler = require('./msgHndlr')
 const options = require('./options')
 const { premiUser } = require('./config.json')
 
 const start = async (client = new Client()) => {
+    const allChatz = await client.getAllChats()
+
     console.log('[SERVER] Server Started!')
     // Force it to keep the current session
     client.onStateChanged((state) => {
         console.log('[Client State]', state)
         if (state === 'CONFLICT' || state === 'UNLAUNCHED') client.forceRefocus()
     })
+
+    // ClearChat!!!
+    cron.schedule('0 1 * * *', async () => {
+        for (let dchat of allChatz) {
+            await client.deleteChat(dchat.id)
+        }
+        console.log('[SYSTEM] Clear All Chats!')
+    });
+
     // listening on message
     client.onMessage((async (message) => {
         client.getAmountOfLoadedMessages()
