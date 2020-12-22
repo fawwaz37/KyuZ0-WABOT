@@ -1,16 +1,3 @@
-const { decryptMedia } = require('@open-wa/wa-decrypt')
-const fs = require('fs-extra')
-const axios = require('axios')
-const moment = require('moment-timezone')
-const get = require('got')
-const color = require('./lib/color')
-const { spawn, exec } = require('child_process')
-const nhentai = require('nhentai-js')
-const { API } = require('nhentai-api')
-const { liriklagu, randomNimek, sleep, jadwalTv, ss } = require('./lib/functions.js')
-const { help, snk, info, donate, readme, listChannel, adminMenu, ownerMenu, mySeller, VIPInfo, animeMenu, downloaderMenu, stickerMenu, mainMenu, searchMenu, nffMenu, otherMenu, nsfwMenu } = require('./lib/help')
-const { stdout } = require('process')
-const ban = JSON.parse(fs.readFileSync('./lib/banned.json'))
 const nsfwgrp = JSON.parse(fs.readFileSync('./lib/NSFW.json'))
 const antilink = JSON.parse(fs.readFileSync('./lib/antilink.json'))
 const antitoxic = JSON.parse(fs.readFileSync('./lib/antitoxic.json'))
@@ -24,8 +11,8 @@ const cpuStats = require("cpu-stat");
 const request = require('request-promise');
 const serp = require("serp");
 const mysql = require('mysql2');
-const { uploadImages } = require('./utils/fetcher')
-const { processTime } = require('./utils')
+const { uploadImages } = require('./utils/fetcher');
+const { processTime } = require('./utils');
 const {
     cekResi,
     translate,
