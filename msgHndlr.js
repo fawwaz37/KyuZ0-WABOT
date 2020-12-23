@@ -4624,6 +4624,7 @@ module.exports = msgHandler = async (client, message) => {
                         } else {
                             if (data.status !== true) return client.reply(from, 'Maaf, terdapat masalah pada perintah ini! Silahkan lapor owner dengan cara SS pesan ini dan kirim ke contact Owners!\n\nKetik: *$owners*')
                             const { judul, article } = data.data
+                            if(!judul) return client.reply(from, 'Maaf, terdapat masalah pada perintah ini!', id)
                             client.reply(from, `*Judul:* ${judul}\n\n${article}`, id)
                         }
                     })
@@ -4644,6 +4645,7 @@ module.exports = msgHandler = async (client, message) => {
                         } else {
                             if (data.status !== true) return client.reply(from, 'Maaf, terdapat masalah pada perintah ini! Silahkan lapor owner dengan cara SS pesan ini dan kirim ke contact Owners!\n\nKetik: *$owners*')
                             const { judul, article } = data.data
+                            if(!judul) return client.reply(from, 'Maaf, terdapat masalah pada perintah ini!', id)
                             client.reply(from, `*Judul:* ${judul}\n\n${article}`, id)
                         }
                     })
@@ -4665,6 +4667,7 @@ module.exports = msgHandler = async (client, message) => {
                         } else {
                             if (data.status !== true) return client.reply(from, 'Maaf, terdapat masalah pada perintah ini! Silahkan lapor owner dengan cara SS pesan ini dan kirim ke contact Owners!\n\nKetik: *$owners*')
                             const { judul, article } = data.data
+                            if(!judul) return client.reply(from, 'Maaf, terdapat masalah pada perintah ini!', id)
                             client.reply(from, `*Judul:* ${judul}\n\n${article}`, id)
                         }
                     })
@@ -4684,6 +4687,7 @@ module.exports = msgHandler = async (client, message) => {
                         } else {
                             if (data.status !== true) return client.reply(from, 'Maaf, terdapat masalah pada perintah ini! Silahkan lapor owner dengan cara SS pesan ini dan kirim ke contact Owners!\n\nKetik: *$owners*')
                             const { judul, article } = data.data
+                            if(!judul) return client.reply(from, 'Maaf, terdapat masalah pada perintah ini!', id)
                             client.reply(from, `*Judul:* ${judul}\n\n${article}`, id)
                         }
                     })
