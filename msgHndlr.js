@@ -4187,6 +4187,7 @@ module.exports = msgHandler = async (client, message) => {
                         } else if (res.statusCode !== 200) {
                             console.log('Status:', res.statusCode);
                         } else {
+                            if(!data.rerult) return client.reply(from, 'Maaf, perintah ini sedang dalam perbaikan.', id)
                             client.sendFileFromUrl(from, data.result, 'loli.jpeg', 'Neehh... Dasar lolicon!', id)
                         }
                     })
@@ -4218,6 +4219,7 @@ module.exports = msgHandler = async (client, message) => {
                                             } else if (res.statusCode !== 200) {
                                                 console.log('Status:', res.statusCode);
                                             } else {
+                                                if(!data.result) return client.reply(from, 'Maaf, perintah ini sedang dalam perbaikan.', id)
                                                 client.sendFileFromUrl(from, data.result, 'loli.jpeg', 'Neehh... Dasar lolicon!', id)
                                             }
                                         })
@@ -4245,6 +4247,7 @@ module.exports = msgHandler = async (client, message) => {
                                             } else if (res.statusCode !== 200) {
                                                 console.log('Status:', res.statusCode);
                                             } else {
+                                                if(!data.result) return client.reply(from, 'Maaf, perintah ini sedang dalam perbaikan.', id)
                                                 client.sendFileFromUrl(from, data.result, 'loli.jpeg', 'Neehh... Dasar lolicon!', id)
                                             }
                                         })
@@ -4265,6 +4268,7 @@ module.exports = msgHandler = async (client, message) => {
                             } else if (res.statusCode !== 200) {
                                 console.log('Status:', res.statusCode);
                             } else {
+                                if(!data.result) return client.reply(from, 'Maaf, perintah ini sedang dalam perbaikan.', id)
                                 client.sendFileFromUrl(from, data.result, 'loli.jpeg', 'Neehh... Dasar lolicon!', id)
                             }
                         })
